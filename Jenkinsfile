@@ -1,7 +1,9 @@
 pipeline {
     agent any
 
-    properties([pipelineTriggers([pollSCM('')])])
+    triggers {
+        pollSCM('*/2 * * * *')
+    }
 
     stages {
         stage('Build') {
