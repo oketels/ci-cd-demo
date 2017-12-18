@@ -7,8 +7,10 @@ pipeline {
 
     stages {
         stage('Build') {
+            agent { docker 'java:8-jdk' }
             steps {
-                echo 'Building..'
+                checkout scm
+                sh './mvnw install dockerfile:build'
             }
         }
         stage('Test') {
@@ -16,11 +18,10 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
-            steps {
-                node('docker-prod') {
-                    echo "Deploying ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                }
+        stage('Deploy'){
+            agent{ node { label 'docker-prod'}}
+            steps{
+                sh 'echo "Deploying ${env.BUILD_ID} on ${env.JENKINS_URL}"'
             }
         }
     }
