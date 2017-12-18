@@ -17,8 +17,10 @@ pipeline {
             }
         }
         stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+            node('docker-prod') {
+                steps {
+                    echo "Deploying ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                }
             }
         }
     }
