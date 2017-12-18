@@ -1,22 +1,45 @@
-# Compiled class file
-*.class
+syntax: glob
 
-# Log file
-*.log
 
-# BlueJ files
-*.ctxt
+target
+test-output
+generated
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Mac OS X files
+.DS_Store
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# IDE files
+*.iml
+*.ipr
+*.iws
+.idea
+maven-eclipse.xml
+
+# Mercurial files
+*.orig
+
+# jBPM files
+.processdefinition*
+
+# Velocity logs
+velocity.log*
+velocity.log
+
+# maven release plugin generated files
+*.releaseBackup
+*.versionsBackup
+*.xml.next
+*.xml.tag
+release.properties
+
+# soapUI generated files
+soapui-errors.log
+soapui.log
+
+# Uncatogrized
+.classpath
+.project
+.settings
+.externalToolBuilders
+.metadata
