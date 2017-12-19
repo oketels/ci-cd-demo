@@ -11,10 +11,12 @@ pipeline {
 
     stages {
         stage('Build') {
+            agent{ node { label 'master'}}
             steps {
                 checkout scm
-                sh './mvnw install dockerfile:build'
+
                 sh 'echo "username is $DOCKER_HUB_CREDENTIALS_USR and password is $DOCKER_HUB_CREDENTIALS_PSW"'
+                sh './mvnw install dockerfile:build'
             }
         }
         stage('Test') {
@@ -25,7 +27,7 @@ pipeline {
         stage('Deploy'){
             agent{ node { label 'docker-prod'}}
             steps{
-                sh 'echo "Deploying ${env.BUILD_ID} on ${env.JENKINS_URL}"'
+                sh 'echo "Deploying ..."'
             }
         }
     }
