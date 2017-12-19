@@ -12,14 +12,14 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent{ node { label 'master'}}
+            agent{ node { label 'docker-prod'}}
             steps {
                 checkout scm
 
                 sh 'echo "username is $DOCKER_HUB_CREDENTIALS_USR and password is $DOCKER_HUB_CREDENTIALS_PSW"'
                 sh './mvnw install'
 
-                sh "docker build -t ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER} ."
+                sh 'docker build -t ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER} .'
 
                 withDockerRegistry([url: 'https://index.docker.io/v1/', credentialsId: 'dockerhubcredentials']) {
                     sh "docker push ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER}"
