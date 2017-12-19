@@ -25,7 +25,7 @@ pipeline {
         }
 
         stage('Test') {
-            agent node { label 'docker-prod'}}
+            agent node { label 'docker-prod'}
             steps {
                 echo 'Testing..'
             }
