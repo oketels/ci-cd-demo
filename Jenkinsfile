@@ -35,6 +35,7 @@ pipeline {
             agent{ node { label 'docker-prod'}}
             steps{
                 sh 'echo "Deploying ..."'
+                sh 'docker service update --image ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER} ci-cd-demo'
             }
         }
     }
