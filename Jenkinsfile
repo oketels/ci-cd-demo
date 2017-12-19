@@ -1,7 +1,7 @@
 env.DOCKERHUB_USERNAME = 'oketels'
 
 pipeline {
-    agent none
+    agent any
 
     triggers {
         pollSCM('*/2 * * * *')
@@ -9,10 +9,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker 'java:8-jdk'
-                args '-v $HOME/.m2:/root/.m2'
-            }
+            agent { docker 'java:8-jdk'}
 
             steps {
                 checkout scm
