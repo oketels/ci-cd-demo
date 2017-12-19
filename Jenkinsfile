@@ -7,7 +7,6 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent { docker 'java:8-jdk' }
             steps {
                 checkout scm
                 sh './mvnw install dockerfile:build'
