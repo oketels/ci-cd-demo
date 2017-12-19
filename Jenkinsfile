@@ -6,6 +6,7 @@ pipeline {
     }
 
     environment{
+        DOCKERHUB_USERNAME = 'oketels'
         DOCKER_HUB_CREDENTIALS = credentials('dockerhubcredentials')
     }
 
@@ -16,7 +17,13 @@ pipeline {
                 checkout scm
 
                 sh 'echo "username is $DOCKER_HUB_CREDENTIALS_USR and password is $DOCKER_HUB_CREDENTIALS_PSW"'
-                sh './mvnw install dockerfile:build'
+                sh './mvnw install'
+
+                sh "docker build -t ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER} ."
+
+                withDockerRegistry([url: 'https://index.docker.io/v1/', credentialsId: 'dockerhubcredentials']) {
+                    sh "docker push ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER}"
+                }
             }
         }
         stage('Test') {
