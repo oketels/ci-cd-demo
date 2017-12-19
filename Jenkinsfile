@@ -12,7 +12,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent{ node { label 'docker-prod'}}
+            agent{ node { label 'docker-dev'}}
             steps {
                 checkout scm
 
