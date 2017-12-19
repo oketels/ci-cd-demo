@@ -1,7 +1,7 @@
 env.DOCKERHUB_USERNAME = 'oketels'
 
 pipeline {
-    agent any
+    agent none
 
     triggers {
         pollSCM('*/2 * * * *')
@@ -18,13 +18,14 @@ pipeline {
                 checkout scm
                 sh './mvnw install dockerfile:build'
 
-                withDockerRegistry([credentialsId: 'dockerhubcredentials']) {
+                withDockerRegistry([credentialsId: 'dockerhubcredentials', url:'https://index.docker.io/v1/']) {
                     sh "docker push ${DOCKERHUB_USERNAME}/ci-cd-demo"
                 }
             }
         }
 
         stage('Test') {
+            agent node { label 'docker-prod'}}
             steps {
                 echo 'Testing..'
             }
