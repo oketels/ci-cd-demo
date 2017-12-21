@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>serving Hello World since 1996</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>Greetings !</h1>
+    </div>
+    <p th:text="'Hello, ' + ${name} + '!'"/>
+</div>
+</body>
+</html>
