@@ -17,7 +17,7 @@ pipeline {
                 checkout scm
 
                 sh 'echo "username is $DOCKER_HUB_CREDENTIALS_USR and password is $DOCKER_HUB_CREDENTIALS_PSW"'
-                sh './mvnw install'
+                sh './mvnw clean install'
 
                 sh 'docker build -t ${DOCKERHUB_USERNAME}/ci-cd-demo:${BUILD_NUMBER} .'
 
